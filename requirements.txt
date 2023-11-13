@@ -1,0 +1,7 @@
+# build dependencies
+pip>=22.3 # Due to a bug in `pip install -e .` vs read-only system-wide site-packages
+
+numpy
+jax
+pennylane 
+random 
