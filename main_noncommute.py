@@ -68,11 +68,21 @@ def circuit(params, order):
 
 
 def loss_fn(params, orders, target_distributions):
+            """
+    :param params:
+    :param order (list[int]): permutation of indices indicating the order of observables
+    :param target_distributions: array of ground truth probability distributions 
+    :return: the sum over Least Mean Square losses between each model output distribution and the corresponding target distribution 
+    """
     model_distributions = jnp.stack([circuit(params, order) for order in orders])
     diff = model_distributions - target_distributions
     return jnp.sum(diff * diff) / len(orders)
 
 def get_noncommutativity(params):
+        """
+    :param params:
+    :return: non-commutativity score as computed from Eq. 4 in the paper: https://www.nature.com/articles/srep25241. 
+    """
     matrix_fn = qml.matrix(obs_check)
     observables = []
     for i in params: 
@@ -108,7 +118,6 @@ histories_test = []
 non_commute = []
 for i in range(n_runs):
     # pick random initial parameters
-    # params = rng_params.uniform(low=-math.pi, high=math.pi, size=(n_obs, n_obs, 4))
     params = np.array([[[rng_params.uniform(low=-math.pi, high=math.pi) for i in range(4)] for i in range(n_obs) ]] * n_obs)
 
     # pick unique random orders
@@ -136,7 +145,7 @@ for i in range(n_runs):
     loss_history_test = []
     commute_score = [] 
     for j in range(epochs):
-        # print("step", i)
+        print("step", i)
         time0 = time.time()
         commute_score.append(get_noncommutativity(params))
         params, loss, opt_state = update(params, opt_state)
