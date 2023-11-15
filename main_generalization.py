@@ -65,6 +65,12 @@ def circuit(params, order):
 
 
 def loss_fn(params, orders, target_distributions):
+    """
+    :param params:
+    :param order (list[int]): permutation of indices indicating the order of observables
+    :param target_distributions: array of ground truth probability distributions 
+    :return: the sum over Least Mean Square losses between each model output distribution and the corresponding target distribution 
+    """
     model_distributions = jnp.stack([circuit(params, order) for order in orders])
     diff = model_distributions - target_distributions
     return jnp.sum(diff * diff) / len(orders)
