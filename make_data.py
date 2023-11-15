@@ -10,12 +10,18 @@ def d1(
         goodness_scores=None, #list of specific goodness scores from real data (rather than random)
         rng=None, #Seed for the random list of public probabilities 
 ):
-    """
+    """ Takes a sequence of given or randomely generated likeability scores, and updates subsequent scores 
+    dependent on the current score such that it is either raised or lowered by the average difference 
+    between the two scores - thus making outcomes "more even". This rule, known as "even-handedness", typically 
+    comes into play with questions containing similar objects; such as "Do you have a good opinion of Bill Clinton?" and "Do you
+    have a good opinion of Al Gore?" The probability of asnwering "yes" to one of these questions depends on which one is asked first
+    and the likeability scores of the individuals. This is described more in detail in Ref. https://www.jstor.org/stable/3078697. 
+
     :param order: list of question order EX: [2,3,4,1,5] for 5 questions
     :param goodness_scores: Input scores on the "goodness" of a person. If none, scores are random.
     :param rng: Numpy random number generator.
-    :return:
-    """
+    :return: The probability distribution over bitstrings where "000" corresponds to "no, no, no".
+    """ 
     n_questions = len(order)
     if goodness_scores == None:
         goodness_scores = []
@@ -60,12 +66,10 @@ def d2(
     answer is yes. This dataset is based off of real data regarding school bullying, where we see 45% increases of students answering yes to being bullied
     if they are asked about a specific type of bullying first. This is found in the study: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5965535/#:~:text=A%20randomized%20experiment%20(n%20%3D%205%2C951,several%20widely%20used%20bullying%20surveys.
 
-        Args:
-            order_input: list of question orders starting at an index of zero. 
-            seed: random seed if the goodness_scores are randomely generated. 
-
-        Returns:
-            The probability distribution over bitstrings where "000" corresponds to "no, no, no".
+        :param order_input: list of question orders starting at an index of zero. 
+        :param seed: random seed if the goodness_scores are randomely generated. 
+        :param rescale_coefficient: portion amount to raise or lower the probabilitiy 
+        :return:  The probability distribution over bitstrings where "000" corresponds to "no, no, no".
     """
     n_questions = len(order_input)
     question_specifications = [i for i in np.arange(0, 1, 1 / n_questions)] #General is Low, Specific is High
