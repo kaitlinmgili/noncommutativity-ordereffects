@@ -76,9 +76,6 @@ def update(params, opt_state):
     params = optax.apply_updates(params, updates)
     return params, loss, opt_state
 
-
-
-
 for n_orders_train in train_list: 
     histories_train = []
     histories_test = []
