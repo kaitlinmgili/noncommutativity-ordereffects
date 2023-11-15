@@ -1,7 +1,10 @@
 # build dependencies
 pip>=22.3 # Due to a bug in `pip install -e .` vs read-only system-wide site-packages
 
-numpy
-jax
-pennylane 
-random 
+python = 3.9.17
+numpy = 1.26.1 
+jax = 0.4.14
+jaxlib = 0.4.14
+pennylane = 0.31.1
+optax = 0.1.7
+
