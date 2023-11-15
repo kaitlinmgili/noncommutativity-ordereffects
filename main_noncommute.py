@@ -68,7 +68,7 @@ def circuit(params, order):
 
 
 def loss_fn(params, orders, target_distributions):
-            """
+    """
     :param params:
     :param order (list[int]): permutation of indices indicating the order of observables
     :param target_distributions: array of ground truth probability distributions 
@@ -79,7 +79,7 @@ def loss_fn(params, orders, target_distributions):
     return jnp.sum(diff * diff) / len(orders)
 
 def get_noncommutativity(params):
-        """
+    """
     :param params:
     :return: non-commutativity score as computed from Eq. 4 in the paper: https://www.nature.com/articles/srep25241. 
     """
