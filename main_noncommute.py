@@ -81,7 +81,7 @@ def loss_fn(params, orders, target_distributions):
 def get_noncommutativity(params):
     """
     :param params:
-    :return: non-commutativity score as computed from Eq. 4 in the paper: https://www.nature.com/articles/srep25241. 
+    :return: non-commutativity score as computed from Eq. 4 in Ref. https://www.nature.com/articles/srep25241. 
     """
     matrix_fn = qml.matrix(obs_check)
     observables = []
