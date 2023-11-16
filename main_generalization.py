@@ -133,11 +133,11 @@ for n_orders_train in train_list:
     a = np.array(histories_train)
     b = np.array(histories_test)
     np.savetxt(
-        f"/Users/kgili/Downloads/noncommutativity-order-effects/results/dataset_train_losses-{n_obs}_obs-{n_orders_train}_train.csv",
+        f"/Users/dataset_train_losses-{n_obs}_obs-{n_orders_train}_train.csv",
         a,
     )
     np.savetxt(
-        f"/Users/kgili/Downloads/noncommutativity-order-effects/results/dataset_train_losses-{n_obs}_obs-{n_orders_train}_test.csv",
+        f"/Users/dataset_train_losses-{n_obs}_obs-{n_orders_train}_test.csv",
         b,
     )
 
