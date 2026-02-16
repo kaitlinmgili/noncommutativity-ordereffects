@@ -103,9 +103,3 @@ def d2(
 
     return np.asarray(list(prob_dist.values()))
 
-def get_data_noncommute_score(order_distributions):    
-    for i, j in zip(order_distributions[:-1], order_distributions[1:]):
-        diff = i - j 
-    return np.sum(diff * diff) / len(order_distributions)
-
-
